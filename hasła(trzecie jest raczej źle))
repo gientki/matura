@@ -1,0 +1,122 @@
+#include<iostream>
+#include<fstream>
+#include<cstdlib>
+using namespace std;
+string sortowanko(string e)
+{char y;
+	for(int i=e.length();i>0;i--)
+	for(int j=0;j<i-1;j++)	
+	if(e[j]>e[j+1])
+	 {
+		y=e[j];
+		e[j]=e[j+1];
+		e[j+1]=y;
+	}
+	return e;
+}
+int main()
+{
+	fstream plik;
+	char h;
+	int x=0,y,zad1=0,z,zadanie3=0,m=0,zad4=0,n=0;
+	string hasla[200],zad3[200],z41[200],z42[200],z43[200];
+	string e;
+	plik.open("hasla.txt",ios::in);
+	string linia;
+	while(getline(plik,linia))
+	{
+		hasla[x]=linia;
+
+		x++;
+	}	
+	plik.close();
+		for(int i=0;i<x;i++)
+		{
+				for(int j=0;j<hasla[i].length();j++)
+		{
+			h=hasla[i][j];
+			if((h>=48)&&(h<=57))
+			{
+		
+			i++;
+	
+		zad1++;
+			}
+			}
+			
+		}
+		cout<<"zad1"<<' '<<zad1<<endl<<"zad2"<<endl;
+		for(int i=0;i<x;i++)
+		{
+			for(int j=i+1;j<x;j++)
+			{
+				if(hasla[i]==hasla[j])
+				cout<<hasla[i]<<endl;
+			}
+		}
+		for(int i=0;i<x;i++)
+		{
+			e=hasla[i];
+			zad3[i]=sortowanko(e);
+			
+		}
+		for(int i=0;i<x-1;i++)
+		{	z=zad3[i].length()-4;
+			for(int j=0;j<z;j++)
+			{
+			if(zad3[i][j]  ==zad3[i][j+1]-1)
+			if(zad3[i][j+1]==zad3[i][j+2]-1)
+			if(zad3[i][j+2]==zad3[i][j+3]-1)
+			if(zad3[i][j+3]==zad3[i][j+4]-1)
+			{
+			i++;
+			zadanie3++;
+			}
+			
+			}
+		}
+		cout<<"zad3"<<' '<<zadanie3<<endl;
+		for(int i=0;i<x;i++)
+		{
+			z=hasla[i].length();
+			for(int j=0;j<z;j++)
+			{
+				if((hasla[i][j]>47)&&(hasla[i][j]<58))
+				{
+					z41[m]=hasla[i];
+				
+					m++;	
+				i++;				
+				}
+			}
+		}
+			for(int i=0;i<m;i++)
+			{
+				for(int j=0;j<z41[i].length();j++)
+				if((z41[i][j]>=97)&&(z41[i][j]<=122))
+				{
+				z42[n]=z41[i];
+				n++;
+				i++;
+				}
+			}
+			m=0;
+			for(int i=0;i<n;i++)
+			{
+				for(int j=0;j<z42[i].length();j++)
+				if((z42[i][j]>=65)&&(z42[i][j]<=90))
+			{
+				z43[m]=z42[i];
+				m++;
+				i++;
+			}
+						
+			}
+			for(int i=0;i<m;i++)
+			{
+				if(z43[i].length()>=8) zad4++;
+			}
+		
+		cout<<"zad4"<<' '<<zad4;
+	return 0;
+}
